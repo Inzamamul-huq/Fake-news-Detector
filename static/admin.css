@@ -1,0 +1,253 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+.approve-btn {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.approve-btn:hover {
+    background-color: darkgreen;
+}
+
+.remove-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.remove-btn:hover {
+    background-color: darkred;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: #7f8c8d;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+#refresh-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#refresh-btn:hover {
+    background-color: #2980b9;
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter label {
+    color: #7f8c8d;
+}
+
+.filter select {
+    padding: 0.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: white;
+}
+
+/* Feedback List */
+.feedback-list {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    min-height: 300px;
+}
+
+.loading, .no-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    gap: 0.5rem;
+}
+
+/* Feedback Item */
+.feedback-item {
+    border-bottom: 1px solid #ecf0f1;
+    padding: 1.5rem 0;
+}
+
+.feedback-item:last-child {
+    border-bottom: none;
+}
+
+.feedback-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.feedback-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.feedback-time {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.feedback-status {
+    background-color: #f8f9fa;
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-unreviewed {
+    color: #f39c12;
+}
+
+.status-reviewed {
+    color: #2ecc71;
+}
+
+.feedback-text {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.feedback-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-feedback {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.feedback-tag {
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.tag-real {
+    background-color: #e8f8f5;
+    color: #2ecc71;
+}
+
+.tag-fake {
+    background-color: #fdedec;
+    color: #e74c3c;
+}
+
+.approval-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.approve-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.mark-real {
+    background-color: #e8f8f5;
+    color: #2ecc71;
+    border: 1px solid #2ecc71;
+}
+
+.mark-real:hover {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.mark-fake {
+    background-color: #fdedec;
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+}
+
+.mark-fake:hover {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none;
+}

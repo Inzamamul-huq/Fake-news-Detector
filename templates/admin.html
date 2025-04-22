@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Fake News Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Admin Panel - Fake News Detector</h1>
+            <p>Review and approve user feedback</p>
+        </header>
+        
+        <main>
+            <div class="controls">
+                <button id="refresh-btn"><i class="fas fa-sync-alt"></i> Refresh Data</button>
+                <div class="filter">
+                    <label for="filter-select">Filter:</label>
+                    <select id="filter-select">
+                        <option value="all">All Feedback</option>
+                        <option value="unreviewed">Unreviewed Only</option>
+                        <option value="reviewed">Reviewed Only</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="feedback-list" id="feedback-list">
+                <div class="loading" id="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Loading...
+                </div>
+                <div class="no-data hidden" id="no-data">
+                    No feedback data available.
+                </div>
+                <!-- Feedback items will be inserted here -->
+            </div>
+        </main>
+        
+        <footer>
+            <p>© 2025 Fake News Detection System</p>
+        </footer>
+    </div>
+    
+    <script src="{{ url_for('static', filename='admin.js') }}"></script>
+</body>
+</html>

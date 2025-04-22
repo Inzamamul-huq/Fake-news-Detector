@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Fake News Detector</h1>
+            <p>Enter news text to detect if it's real or fake</p>
+        </header>
+        
+        <main>
+            <div class="input-container">
+                <textarea id="news-text" placeholder="Paste news text here..."></textarea>
+                <button id="analyze-btn">Analyze</button>
+            </div>
+            
+            <div class="result-container" id="result-container">
+                <div class="spinner hidden" id="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                
+                <div class="result hidden" id="result">
+                    <div class="result-header">
+                        <h2>Result:</h2>
+                        <span class="prediction" id="prediction-text">REAL</span>
+                    </div>
+                    
+                    <div class="confidence">
+                        <div class="confidence-bar-container">
+                            <div class="confidence-bar" id="confidence-bar"></div>
+                        </div>
+                        <span id="confidence-text">90% confidence</span>
+                    </div>
+                    
+                    <div class="feedback-container" id="feedback-container">
+                        <p>Was this prediction correct?</p>
+                        <div class="feedback-buttons">
+                            <button class="feedback-btn" id="real-btn">
+                                <i class="fas fa-check"></i> This is REAL
+                            </button>
+                            <button class="feedback-btn" id="fake-btn">
+                                <i class="fas fa-times"></i> This is FAKE
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="feedback-message hidden" id="feedback-message">
+                        <p>Thank you for your feedback!</p>
+                    </div>
+                    
+                    <div class="admin-message hidden" id="admin-message">
+                        <p>This result is based on previous user feedback that has been verified.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>© 2025 Fake News Detection System</p>
+        </footer>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
