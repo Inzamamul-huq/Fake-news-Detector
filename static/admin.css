@@ -1,4 +1,4 @@
-/* Global Styles */
+
 * {
     margin: 0;
     padding: 0;
@@ -119,7 +119,7 @@ header p {
     gap: 0.5rem;
 }
 
-/* Feedback Item */
+
 .feedback-item {
     border-bottom: 1px solid #ecf0f1;
     padding: 1.5rem 0;
@@ -239,7 +239,7 @@ header p {
     color: white;
 }
 
-/* Footer */
+
 footer {
     text-align: center;
     margin-top: 2rem;
@@ -247,7 +247,7 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Utility Classes */
+
 .hidden {
     display: none;
 }

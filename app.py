@@ -6,13 +6,12 @@ import pickle
 import os
 from datetime import datetime
 
-# Try to import MongoDB, but provide fallback if it fails
 try:
     import pymongo
-    # Try establishing connection
+  
     try:
         client = pymongo.MongoClient("mongodb://localhost:27017/", serverSelectionTimeoutMS=5000)
-        client.server_info()  # Will raise exception if connection fails
+        client.server_info()  
         print("MongoDB connection successful")
         db = client["fake_news_db"]
         feedback_collection = db["user_feedback"]
@@ -26,7 +25,6 @@ except ImportError:
     print("pymongo not installed")
     using_mongodb = False
 
-# If MongoDB connection failed, create an in-memory alternative
 if not using_mongodb:
     print("Using in-memory database instead of MongoDB")
     class InMemoryDB:
@@ -52,7 +50,7 @@ if not using_mongodb:
 
 app = Flask(__name__)
 
-# Load pre-trained models
+
 try:
     with open('DT_model.pkl', 'rb') as f:
         model = pickle.load(f)
@@ -86,12 +84,12 @@ def submit_username():
     if not username:
         return jsonify({"error": "No username provided"}), 400
 
-    # Check if username exists (if yes, allow but don't insert again)
+   
     existing_user = db["users"].find_one({"username": username})
     if not existing_user:
-        db["users"].insert_one({"username": username})  # Insert only if new
+        db["users"].insert_one({"username": username}) 
 
-    # Redirect logic
+    
     if username == "admininza007":
         return jsonify({"redirect": url_for('admin')})
     else:
@@ -104,7 +102,7 @@ def predict():
         data = request.get_json()
         news_text = data['text']
         
-        # Try to get existing feedback
+     
         existing_feedback = feedback_collection.find_one({"text": news_text})
         if existing_feedback:
             return jsonify({
@@ -113,7 +111,7 @@ def predict():
                 'is_from_feedback': True
             })
         
-        # Use model if available
+       
         if models_loaded:
             text_vectorized = vectorizer.transform([news_text])
             prediction = model.predict(text_vectorized)[0]
@@ -126,8 +124,8 @@ def predict():
                 'is_from_feedback': False
             }
         else:
-            # Fallback "model" - just based on text length for demo purposes
-            is_fake = len(news_text) < 100  # Simplified demo logic
+           
+            is_fake = len(news_text) < 100  
             result = {
                 'prediction': 'FAKE' if is_fake else 'REAL',
                 'probability': 0.75,
@@ -149,14 +147,14 @@ def submit_feedback():
     try:
         data = request.get_json()
         news_text = data['text']
-        user_feedback = data['feedback']  # 'FAKE' or 'REAL'
+        user_feedback = data['feedback'] 
         
-        # ✅ Updated query to prevent overwriting user_feedback
+        
         feedback_collection.update_one(
             {"text": news_text},
             {"$set": {
-                "user_feedback": user_feedback,  # ✅ Only update feedback
-                "admin_label": user_feedback,  # ✅ Keep admin label same as user feedback initially
+                "user_feedback": user_feedback,  
+                "admin_label": user_feedback,  
                 "timestamp": str(datetime.now()),
                 "is_admin_reviewed": False
             }},
@@ -173,7 +171,7 @@ def submit_feedback():
 def get_all_feedback():
     try:
         feedbacks = list(feedback_collection.find())
-        # Convert ObjectId to string if using MongoDB
+        
         if using_mongodb:
             for feedback in feedbacks:
                 if '_id' in feedback:
@@ -193,13 +191,13 @@ def approve_feedback():
         if not news_text or not admin_label:
             return jsonify({"success": False, "error": "Missing text or admin_label"}), 400
 
-        # Fetch existing feedback entry
+       
         existing_feedback = feedback_collection.find_one({"text": news_text})
 
         if not existing_feedback:
             return jsonify({"success": False, "error": "No matching record found"}), 404
 
-        # ✅ Preserve user feedback
+       
         user_feedback = existing_feedback.get('user_feedback', '')
 
         feedback_collection.update_one(
@@ -207,7 +205,7 @@ def approve_feedback():
             {"$set": {
                 "admin_label": admin_label,
                 "is_admin_reviewed": True,
-                "user_feedback": user_feedback  # ✅ Keep user feedback intact
+                "user_feedback": user_feedback 
             }}
         )
 
@@ -216,18 +214,18 @@ def approve_feedback():
         print(f"Error in approve_feedback route: {e}")
         return jsonify({"success": False, "error": str(e)}), 500
 
-from bson import ObjectId  # Import ObjectId for MongoDB ID handling
+from bson import ObjectId  
 
 @app.route('/admin/remove_feedback', methods=['DELETE'])
 def remove_feedback():
     try:
         data = request.get_json()
-        feedback_id = data.get('id', '').strip()  # Get `_id` instead of `text`
+        feedback_id = data.get('id', '').strip()  
 
         if not feedback_id:
             return jsonify({"success": False, "error": "Missing feedback ID"}), 400
 
-        # Convert string ID to MongoDB ObjectId
+    
         try:
             obj_id = ObjectId(feedback_id)
         except:

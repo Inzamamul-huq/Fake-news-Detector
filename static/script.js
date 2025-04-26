@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // DOM Elements
     const newsTextArea = document.getElementById('news-text');
     const analyzeBtn = document.getElementById('analyze-btn');
     const resultContainer = document.getElementById('result-container');

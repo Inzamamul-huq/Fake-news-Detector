@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url('static/8282936.jpg'); /* Use correct path */
+    background-image: url('static/8282936.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -69,7 +69,7 @@
     })
     .then(response => {
         if (response.redirected) {
-            window.location.href = response.url; // Redirect to the proper page
+            window.location.href = response.url; 
         } else {
             return response.json();
         }
@@ -95,9 +95,9 @@
         .then(response => response.json())
         .then(data => {
             if (data.error) {
-                alert(data.error); // Show error if any
+                alert(data.error);
             } else if (data.redirect) {
-                window.location.href = data.redirect; // Redirect user
+                window.location.href = data.redirect; 
             }
         })
         .catch(error => console.error("Error:", error));
